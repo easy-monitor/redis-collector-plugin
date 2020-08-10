@@ -1,0 +1,149 @@
+[
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "memory_used_bytes metric",
+        "key": "redis_memory_used_bytes",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_memory_used_bytes",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "bytes"
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "connected_clients metric",
+        "key": "redis_connected_clients",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_connected_clients",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": ""
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "memory_max_bytes metric",
+        "key": "redis_memory_max_bytes",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_memory_max_bytes",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "bytes"
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "uptime_in_seconds metric",
+        "key": "redis_uptime_in_seconds",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_uptime_in_seconds",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "seconds"
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "Total number of keys by DB",
+        "key": "redis_db_keys",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_db_keys",
+        "paramDefine": [
+            {
+                "default": "db0",
+                "name": "db",
+                "readOnly": false,
+                "valueType": "string"
+            }
+        ],
+        "tagDefine": [
+            {
+                "default": "db0",
+                "name": "db",
+                "readOnly": false
+            }
+        ],
+        "unit": ""
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "Total number of expiring keys by DB",
+        "key": "redis_db_keys_expiring",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_db_keys_expiring",
+        "paramDefine": [
+            {
+                "default": "db0",
+                "name": "db",
+                "readOnly": false,
+                "valueType": "string"
+            }
+        ],
+        "tagDefine": [
+            {
+                "default": "db0",
+                "name": "db",
+                "readOnly": false
+            }
+        ],
+        "unit": ""
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "keyspace_hits_total metric",
+        "key": "redis_keyspace_hits_total",
+        "metric_type": "counter",
+        "name": "redis_collector_plugin_redis_keyspace_hits_total",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": ""
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "commands_processed_total metric",
+        "key": "redis_commands_processed_total",
+        "metric_type": "counter",
+        "name": "redis_collector_plugin_redis_commands_processed_total",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": ""
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "keyspace_misses_total metric",
+        "key": "redis_keyspace_misses_total",
+        "metric_type": "counter",
+        "name": "redis_collector_plugin_redis_keyspace_misses_total",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": ""
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "net_input_bytes_total metric",
+        "key": "redis_net_input_bytes_total",
+        "metric_type": "counter",
+        "name": "redis_collector_plugin_redis_net_input_bytes_total",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "bytes"
+    },
+    {
+        "agentType": "prometheus",
+        "data_type": "double",
+        "help": "net_output_bytes_total metric",
+        "key": "redis_net_output_bytes_total",
+        "metric_type": "counter",
+        "name": "redis_collector_plugin_redis_net_output_bytes_total",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "bytes"
+    }
+]
