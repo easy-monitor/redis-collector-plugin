@@ -11,6 +11,18 @@
         "unit": "bytes"
     },
     {
+        "agentType": "calculated",
+        "data_type": "double",
+        "help": "memory_used_percentage metric",
+        "key": "redis_memory_used_percent",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_memory_used_percent",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "percent(100)",
+        "expression": "100 * (redis_memory_used_bytes / redis_memory_max_bytes)"
+    },
+    {
         "agentType": "prometheus",
         "data_type": "double",
         "help": "connected_clients metric",
@@ -68,6 +80,31 @@
         "unit": ""
     },
     {
+        "agentType": "calculated",
+        "data_type": "double",
+        "help": "Total number of keys",
+        "key": "redis_db_keys_sum",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_db_keys_sum",
+        "paramDefine": [
+            {
+                "default": "db0",
+                "name": "db",
+                "readOnly": false,
+                "valueType": "string"
+            }
+        ],
+        "tagDefine": [
+            {
+                "default": "db0",
+                "name": "db",
+                "readOnly": false
+            }
+        ],
+        "unit": "",
+        "expression": "sum(redis_db_keys)" 
+    },
+    {
         "agentType": "prometheus",
         "data_type": "double",
         "help": "Total number of expiring keys by DB",
@@ -92,6 +129,43 @@
         "unit": ""
     },
     {
+        "agentType": "calculated",
+        "data_type": "double",
+        "help": "Total number of expiring keys",
+        "key": "redis_db_keys_expiring_sum",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_db_keys_expiring_sum",
+        "paramDefine": [
+            {
+                "default": "db0",
+                "name": "db",
+                "readOnly": false,
+                "valueType": "string"
+            }
+        ],
+        "tagDefine": [
+            {
+                "default": "db0",
+                "name": "db",
+                "readOnly": false
+            }
+        ],
+        "unit": "",
+        "expression": "sum(redis_db_keys_expiring)" 
+    },
+    {
+        "agentType": "calculated",
+        "data_type": "double",
+        "help": "Total number of not expiring keys",
+        "key": "redis_db_keys_not_expiring_sum",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_db_keys_not_expiring_sum",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "",
+        "expression": "sum(redis_db_keys) - sum(redis_db_keys_expiring)" 
+    },
+    {
         "agentType": "prometheus",
         "data_type": "double",
         "help": "keyspace_hits_total metric",
@@ -101,6 +175,18 @@
         "paramDefine": [],
         "tagDefine": [],
         "unit": ""
+    },
+    {
+        "agentType": "calculated",
+        "data_type": "double",
+        "help": "keyspace_hits_total metric",
+        "key": "redis_keyspace_hits_rate",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_keyspace_hits_rate",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "",
+        "expression": "irate(redis_keyspace_hits_total[5m])"
     },
     {
         "agentType": "prometheus",
@@ -114,6 +200,18 @@
         "unit": ""
     },
     {
+        "agentType": "calculated",
+        "data_type": "double",
+        "help": "commands_processed_total metric",
+        "key": "redis_commands_processed_rate",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_commands_processed_rate",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "",
+        "expression": "rate(redis_commands_processed_total[5m])"
+    },
+    {
         "agentType": "prometheus",
         "data_type": "double",
         "help": "keyspace_misses_total metric",
@@ -123,6 +221,18 @@
         "paramDefine": [],
         "tagDefine": [],
         "unit": ""
+    },
+    {
+        "agentType": "calculated",
+        "data_type": "double",
+        "help": "keyspace_misses_total metric",
+        "key": "redis_keyspace_misses_rate",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_keyspace_misses_rate",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "",
+        "expression": "irate(redis_keyspace_misses_total[5m])"
     },
     {
         "agentType": "prometheus",
@@ -136,6 +246,18 @@
         "unit": "bytes"
     },
     {
+        "agentType": "calculated",
+        "data_type": "double",
+        "help": "net_input_bytes_total metric",
+        "key": "redis_net_input_bytes_rate",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_net_input_bytes_rate",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "bytes/min",
+        "expression":"rate(redis_net_input_bytes_total[5m])"
+    },
+    {
         "agentType": "prometheus",
         "data_type": "double",
         "help": "net_output_bytes_total metric",
@@ -145,5 +267,17 @@
         "paramDefine": [],
         "tagDefine": [],
         "unit": "bytes"
+    },
+    {
+        "agentType": "calculated",
+        "data_type": "double",
+        "help": "net_output_bytes_total metric",
+        "key": "redis_net_output_bytes_rate",
+        "metric_type": "gauge",
+        "name": "redis_collector_plugin_redis_net_output_bytes_rate",
+        "paramDefine": [],
+        "tagDefine": [],
+        "unit": "bytes/min",
+        "expression": "rate(redis_net_output_bytes_total[5m])"
     }
 ]
