@@ -1,3 +1,10 @@
 #!/bin/bash
 
-ps -ef | grep redis_exporter | awk '{print $2}' | xargs kill -9
+if [ ! -f exporter.pid ]; then
+    echo "The Redis exporter is not started."
+    exit 0
+fi
+
+kill -9 $(cat exporter.pid)
+
+rm -rf exporter.pid

@@ -120,6 +120,13 @@ do
     esac
 done
 
+if [ -f exporter.pid ]; then
+    echo "The Redis exporter has already started."
+    exit 0
+fi
+
 chmod +x ./src/redis_exporter
 
-./src/redis_exporter --redis.addr="redis://$redis_host:$redis_port" --redis.password=$redis_password --web.listen-address=$exporter_host:$exporter_port --web.telemetry-path=$exporter_uri
+./src/redis_exporter --redis.addr="redis://$redis_host:$redis_port" --redis.password=$redis_password --web.listen-address=$exporter_host:$exporter_port --web.telemetry-path=$exporter_uri &
+
+echo $! > exporter.pid
