@@ -1,15 +1,25 @@
 #!/bin/bash
 
+
+PACKAGE_NAME=redis-collector-plugin
+PACKAGE_PATH=$(dirname $(dirname "$(cd `dirname $0`; pwd)"))
+LOG_DIRECTORY=$PACKAGE_PATH/log
+LOG_FILE=$LOG_DIRECTORY/$PACKAGE_NAME.log
+
+
 if ! type getopt >/dev/null 2>&1 ; then
-  echo "Error: command \"getopt\" is not found" >&2
+  message="command \"getopt\" is not found"
+  echo "[ERROR] Message: $message" >& 2
+  echo "$(date "+%Y-%m-%d %H:%M:%S") [ERROR] Message: $message" > $LOG_FILE
   exit 1
 fi
 
-getopt_cmd=`getopt -o h -a -l redis-host:,redis-port:,redis-password:,exporter-host:,exporter-port:,exporter-uri: -n "start.sh" -- "$@"`
+getopt_cmd=`getopt -o h -a -l help:,redis-host:,redis-port:,redis-password:,exporter-host:,exporter-port:,exporter-uri: -n "start_script.sh" -- "$@"`
 if [ $? -ne 0 ] ; then
     exit 1
 fi
 eval set -- "$getopt_cmd"
+
 
 redis_host="127.0.0.1"
 redis_port=6379
@@ -112,21 +122,21 @@ do
             break
             ;;
         *)
-            echo "Error: argument \"$1\" is invalid" >&2
-            echo ""
+            message="argument \"$1\" is invalid"
+            echo "[ERROR] Message: $message" >& 2
+            echo "$(date "+%Y-%m-%d %H:%M:%S") [ERROR] Message: $message" > $LOG_FILE
             print_help
             exit 1
             ;;
     esac
 done
 
-if [ -f exporter.pid ]; then
-    echo "The Redis exporter has already started."
-    exit 0
-fi
+mkdir -p $LOG_DIRECTORY
 
-chmod +x ./src/redis_exporter
+message="start exporter"
+echo "[INFO] Message: $message"
+echo "$(date "+%Y-%m-%d %H:%M:%S") [INFO] Message: $message" >> $LOG_FILE
 
-./src/redis_exporter --redis.addr="redis://$redis_host:$redis_port" --redis.password=$redis_password --web.listen-address=$exporter_host:$exporter_port --web.telemetry-path=$exporter_uri &
-
-echo $! > exporter.pid
+cd $PACKAGE_PATH/script
+chmod +x src/redis_exporter
+./src/redis_exporter --redis.addr=redis://$redis_host:$redis_port --redis.password=$redis_password --web.listen-address=$exporter_host:$exporter_port --web.telemetry-path=$exporter_uri 2>&1 | tee -a $LOG_FILE
