@@ -2,7 +2,7 @@
 
 
 PACKAGE_NAME=redis-collector-plugin
-PACKAGE_PATH=$(dirname $(dirname "$(cd `dirname $0`; pwd)"))
+PACKAGE_PATH=$(dirname "$(cd `dirname $0`; pwd)")
 LOG_DIRECTORY=$PACKAGE_PATH/log
 LOG_FILE=$LOG_DIRECTORY/$PACKAGE_NAME.log
 
@@ -137,6 +137,6 @@ message="start exporter"
 echo "[INFO] Message: $message"
 echo "$(date "+%Y-%m-%d %H:%M:%S") [INFO] Message: $message" >> $LOG_FILE
 
-cd $PACKAGE_PATH/script
+cd $PACKAGE_PATH
 chmod +x src/redis_exporter
 ./src/redis_exporter --redis.addr=redis://$redis_host:$redis_port --redis.password=$redis_password --web.listen-address=$exporter_host:$exporter_port --web.telemetry-path=$exporter_uri 2>&1 | tee -a $LOG_FILE
